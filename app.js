@@ -16,10 +16,10 @@ const reviewRouter = require('./routes/reviewRoutes');
 const app = express();
 
 app.set('view engine', 'pug');
-app.set('view', path.join(__dirname, 'views'))
+app.set('views', path.join(__dirname, 'views'))
 
 // 1) GLOBAL MIDDLEWARES
-// Set security HTTP headers
+// * Set security HTTP headers
 app.use(helmet());
 
 // Development logging
@@ -70,6 +70,14 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
+app.get('/', (req, res) => {
+  res.status(200).render('base')
+});
+
+app.get('/overview', (req, res) => {
+  res.status(200).render('overview')
+})
+
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
