@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
@@ -14,7 +15,8 @@ const reviewRouter = require('./routes/reviewRoutes');
 
 const app = express();
 
-app.set('view wngine', 'pug')
+app.set('view engine', 'pug');
+app.set('view', path.join(__dirname, 'views'))
 
 // 1) GLOBAL MIDDLEWARES
 // Set security HTTP headers
