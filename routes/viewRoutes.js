@@ -1,9 +1,11 @@
 const express = require('express');
-const { getOverview, getTour } = require('../controllers/viewsController');
+const { getHomeTours, getOverview, getTour } = require('../controllers/viewsController');
 
 const router = express.Router();
 
-router.get('/', getOverview)
+router.get('/', getHomeTours)
+
+router.get('/tours', getOverview)
 
 router.get('/tour', getTour)
 
