@@ -1,5 +1,21 @@
 :root {
   --section-rotate: 9vw;
+
+  /* colors */
+  --color-navy: #212832;
+  --color-coral: #DF6951;
+  --color-slate: #5E6282;
+  --color-midnight-blue: #181E4B;
+  --color-goldenrod: #F1A501;
+  --color-pale-peach: #FFF1DA;
+  --color-lavender: #DFD7F9;
+  --color-white: #FFFFFF;
+
+  --color-primary: #55c57a;
+  
+  --color-title-big: #212832;
+  --color-title-small: #5E6282;
+  --color-paragraph-primary: #5E6282;
 }
 
 ::-moz-selection {
