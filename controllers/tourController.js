@@ -2,6 +2,16 @@ const fs = require('fs');
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`));
 
+const checkId = (req, res, next, val) => {
+    if(req.params.id > tours.length) {
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Tour not found'
+        })
+    }
+    next();
+}
+
 const getAllTours = (req, res) => {
     res.status(200).json({
         status: 'success',
@@ -14,13 +24,6 @@ const getAllTours = (req, res) => {
 
 const getTour = (req, res) => {
     const tour = tours.find(el => el.id === parseInt(req.params.id));
-    console.log(tour);
-    if(!tour) {
-        return res.status(404).json({
-            status: 'fail',
-            message: 'Tour not found'
-        })
-    }
 
     res.status(200).json({
         status: 'success',
@@ -46,12 +49,6 @@ const createTour = (req, res) => {
 }
 
 const updateTour = (req, res) => {
-    if(req.params.id > tours.length) {
-        return res.status(404).json({
-            status: 'fail',
-            message: 'Tour not found'
-        })
-    }
 
     res.status(200).json({
         status: 'success',
@@ -62,12 +59,6 @@ const updateTour = (req, res) => {
 }
 
 const deleteTour = (req, res) => {
-    if(req.params.id > tours.length) {
-        return res.status(404).json({
-            status: 'fail',
-            message: 'Tour not found'
-        })
-    }
 
     res.status(204).json({
         status: 'success',
@@ -80,5 +71,6 @@ module.exports = {
     getTour,
     createTour,
     updateTour,
-    deleteTour
+    deleteTour,
+    checkId
 }
