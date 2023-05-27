@@ -1,13 +1,21 @@
-const fs = require('fs')
-const express = require('express')
+const fs = require('fs');
+const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
-const port = 3000;
 
+// Middleware
+app.use(morgan('dev'));
 app.use(express.json());
+
+app.use((req, res, next) => {
+    console.log('Hello from the middleware');
+    next();
+})
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
 
+// Route Handlers
 const getAllTours = (req, res) => {
     res.status(200).json({
         status: 'success',
@@ -81,6 +89,7 @@ const deleteTour = (req, res) => {
     })
 }
 
+// Routes
 app
     .route('/api/v1/tours')
     .get(getAllTours)
@@ -92,6 +101,19 @@ app
     .patch(updateTour)
     .delete(deleteTour)
 
+app
+    .route('/api/v1/users')
+    .get(getAllUsers)
+    .post(createUser)
+
+app
+    .route('/api/v1/users/:id')
+    .get(getUser)
+    .patch(updateUser)
+    .delete(deleteUser)
+
+// Start Server
+const port = 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 })
