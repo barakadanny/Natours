@@ -8,8 +8,7 @@ app.use(express.json());
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
 
-// GET: all tours
-app.get('/api/v1/tours', (req, res) => {
+const getAllTours = (req, res) => {
     res.status(200).json({
         status: 'success',
         results: tours.length,
@@ -17,10 +16,9 @@ app.get('/api/v1/tours', (req, res) => {
             tours: tours
         }
     })
-})
+}
 
-// GET: single tour
-app.get('/api/v1/tours/:id', (req, res) => {
+const getTour = (req, res) => {
     const tour = tours.find(el => el.id === parseInt(req.params.id));
     console.log(tour);
     if(!tour) {
@@ -36,10 +34,9 @@ app.get('/api/v1/tours/:id', (req, res) => {
             tours: tour
         }
     })
-})
+}
 
-// POST: create new tour
-app.post('/api/v1/tours', (req, res) => {
+const createTour = (req, res) => {
     const newId = tours[tours.length - 1].id +1;
     const newTour = Object.assign({id: newId}, req.body);
     tours.push(newTour);
@@ -52,10 +49,9 @@ app.post('/api/v1/tours', (req, res) => {
             }
         })
     })
-})
+}
 
-// PATCH: update tour
-app.patch('/api/v1/tours/:id', (req, res) => {
+const updateTour = (req, res) => {
     if(req.params.id > tours.length) {
         return res.status(404).json({
             status: 'fail',
@@ -69,10 +65,9 @@ app.patch('/api/v1/tours/:id', (req, res) => {
             tour: '<Updated tour here...>'
         }
     })
-})
+}
 
-// DELETE: delete tour
-app.delete('/api/v1/tours/:id', (req, res) => {
+const deleteTour = (req, res) => {
     if(req.params.id > tours.length) {
         return res.status(404).json({
             status: 'fail',
@@ -84,7 +79,18 @@ app.delete('/api/v1/tours/:id', (req, res) => {
         status: 'success',
         data: null
     })
-})
+}
+
+app
+    .route('/api/v1/tours')
+    .get(getAllTours)
+    .post(createTour)
+
+app
+    .route('/api/v1/tours/:id')
+    .get(getTour)
+    .patch(updateTour)
+    .delete(deleteTour)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
