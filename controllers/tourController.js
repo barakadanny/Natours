@@ -1,13 +1,23 @@
 const Tour = require('./../models/tourModel');
 
-const getAllTours = (req, res) => {
-    res.status(200).json({
-        status: 'success',
-        // results: tours.length,
-        // data: {
-        //     tours: tours
-        // }
-    })
+const getAllTours = async (req, res) => {
+    try {
+        const tours = await Tour.find()
+    
+        res.status(200).json({
+            status: 'success',
+            results: tours.length,
+            data: {
+                tours
+            }
+        })
+    } catch (err) {
+        res.status(404).json({
+            status: 'fail',
+            message: err
+        })
+    }
+
 }
 
 const getTour = (req, res) => {
@@ -37,8 +47,6 @@ const createTour = async (req, res) => {
             message: "Invalid data sent!"
         })
     }
-
-
 }
 
 const updateTour = (req, res) => {
