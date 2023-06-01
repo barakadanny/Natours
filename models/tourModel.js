@@ -25,7 +25,9 @@ const tourSchema = new mongoose.Schema({
     },
     ratingsAverage: {
         type: Number,
-        default: 4.5
+        default: 4.5,
+        min: [1, 'Rating must be above 1.0'], // min validator
+        max: [5, 'Rating must be below 5.0'], // max validator
     },
     ratingsQuantity: {
         type: Number,
