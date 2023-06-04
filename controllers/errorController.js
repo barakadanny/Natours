@@ -1,7 +1,8 @@
 const AppError = require('./../utils/appError');
 
 // 🦠 🦠
-// TODO: Work on the message on prod, it's not displaying the right message, it jump to the else statement
+// TODO: Check that the Error is an operational error and send the appropriate response, 
+// CURRENT BEHAVIOR: All errors are being sent to the client as operational errors.
 // 🦠 🦠
 
 const handleCastErrorDB = err => {
@@ -21,11 +22,13 @@ const sendErrorDev = (err, res) => {
 const sendErrorProd = (err, res) => {
     // Operational, trusted error: send message to client
     // Operational errors are errors that we can predict, such as a user not found error
-    if(err.isOperational) {
+
+    if(err) {
+        const errorMessage = err.errors ? Object.values(err.errors)[0].message : 'An error occurred'
         res.status(err.statusCode).json({
-            status: err.status,
-            message: err.message
-        })
+        status: err.status,
+        message: `Error: ${errorMessage}`
+        });
     } else {
         // Programming or other unknown error: don't leak error details
         // 1) Log error
