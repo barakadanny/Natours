@@ -71,7 +71,7 @@ const updateTour = catchAsync(async (req, res, next) => {
     })
 })
 
-const deleteTour = async (req, res) => {
+const deleteTour = catchAsync(async (req, res, next) => {
     const tour = await Tour.findByIdAndDelete(req.params.id)
 
     if(!tour) {
@@ -83,7 +83,7 @@ const deleteTour = async (req, res) => {
         data: null
     })
 
-}
+});
 
 const getTourStats = catchAsync(async (req, res, next) => {
     const stats = await Tour.aggregate([
