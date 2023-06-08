@@ -9,7 +9,8 @@ const signup = catchAsync(async (req, res, next) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        passwordConfirm: req.body.passwordConfirm
+        passwordConfirm: req.body.passwordConfirm,
+        passwordChangedAt: Date.now()
     })
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
@@ -65,12 +66,18 @@ const protect = catchAsync(async(req, res, next) => {
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
     // 3) Check if user still exists
-    const freshUser = await User.findById(decoded.id);
-    if(!freshUser) {
+    const currentUser = await User.findById(decoded.id);
+    if(!currentUser) {
         return next(new AppError('The user belonging to this token does no longer exist.', 401));
     }
 
     // 4) Check if user changed password after the token was issued
+    if(currentUser.changedPasswordAfter(decoded.iat)) {
+        return next(new AppError('User recently changed password! Please log in again.', 401));
+    }
+
+    // GRANT ACCESS TO PROTECTED ROUTE when all above conditions are met
+    req.user = currentUser; // we can use this user data in the next middleware
     next();
 });
 
