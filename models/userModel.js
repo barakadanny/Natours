@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
@@ -36,14 +37,16 @@ const userShema = new mongoose.Schema({
             message: 'Passwords are not the same!'
         }
     },
-    passwordChangedAt: Date
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date
 });
 
 userShema.pre('save', async function(next) {
-    // Only run this function if password was actually modified (or created) - not when updating user data
+    // Only run this function if password was actually modified (or created)
     if(!this.isModified('password')) return next();
 
-    // Hash the password with cost of 12 - the higher the cost the longer it takes to hash the password but the more secure it is
+    // Hash the password with cost of 12 
     this.password = await bcrypt.hash(this.password, 12);
 
     // Delete passwordConfirm field - we don't need it anymore - it's only for validation purposes - it's not persisted in the database
@@ -62,6 +65,21 @@ userShema.methods.changedPasswordAfter = function(JWTTimestamp) {
         return JWTTimestamp < changedTimestamp; // 100 < 200
     }
     return false;
+}
+
+userShema.methods.createPasswordResetToken = function() {
+    const resetToken = crypto.randomBytes(32).toString('hex');
+
+    // Encrypt the reset token
+    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+    console.log({ resetToken }, this.passwordResetToken);
+
+    // Set the passwordResetExpires field to 10 minutes from now
+    this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+    // Return the plain reset token
+    return resetToken;
 }
 
 const User = mongoose.model('User', userShema);
