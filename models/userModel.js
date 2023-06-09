@@ -55,6 +55,16 @@ userShema.pre('save', async function(next) {
     next();
 });
 
+userShema.pre('save', function(next) {
+    // Only run this function if password was actually modified (or created)
+    if(!this.isModified('password') || this.isNew) return next();
+
+    // Subtract 1 second from the passwordChangedAt field to make sure 
+    // that the token is always created after the password is changed
+    this.passwordChangedAt = Date.now() - 1000;
+    next();
+});
+
 userShema.methods.correctPassword = async function(candidatePassword, userPassword) {
     return await bcrypt.compare(candidatePassword, userPassword);
 }
