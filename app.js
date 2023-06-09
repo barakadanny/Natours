@@ -43,7 +43,17 @@ app.use(xss());
 
 // Prevent parameter pollution
 // e.g. /api/v1/tours?sort=duration&sort=price
-app.use(hpp());
+app.use(hpp({
+  // Whitelist allows duplicate parameters in the query string
+  whitelist: [
+    'duration',
+    'ratingsQuantity',
+    'ratingsAverage',
+    'maxGroupSize',
+    'difficulty',
+    'price'
+  ]
+}));
 
 // Serving static files
 app.use(express.static(`${__dirname}/public`));
