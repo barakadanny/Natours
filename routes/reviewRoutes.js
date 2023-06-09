@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllReviews, createReview, deleteReview } = require('./../controllers/reviewController');
+const { getAllReviews, createReview, deleteReview, updateReview } = require('./../controllers/reviewController');
 const { protect, restrictTo } = require('./../controllers/authController');
 
 // mergeParams: true allows us to access the tourId from the tour router
