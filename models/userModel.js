@@ -39,7 +39,12 @@ const userShema = new mongoose.Schema({
     },
     passwordChangedAt: Date,
     passwordResetToken: String,
-    passwordResetExpires: Date
+    passwordResetExpires: Date,
+    active: {
+        type: Boolean,
+        default: true,
+        select: false
+    }
 });
 
 userShema.pre('save', async function(next) {
@@ -49,7 +54,8 @@ userShema.pre('save', async function(next) {
     // Hash the password with cost of 12 
     this.password = await bcrypt.hash(this.password, 12);
 
-    // Delete passwordConfirm field - we don't need it anymore - it's only for validation purposes - it's not persisted in the database
+    // Delete passwordConfirm field - we don't need it anymore 
+    // - it's only for validation purposes - it's not persisted in the database
     this.passwordConfirm = undefined;
 
     next();
@@ -62,6 +68,12 @@ userShema.pre('save', function(next) {
     // Subtract 1 second from the passwordChangedAt field to make sure 
     // that the token is always created after the password is changed
     this.passwordChangedAt = Date.now() - 1000;
+    next();
+});
+
+userShema.pre(/^find/, function(next) {
+    // this points to the current query
+    this.find({ active: { $ne: false } });
     next();
 });
 
