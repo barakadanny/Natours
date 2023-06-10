@@ -10,7 +10,7 @@
   <p align="center">
     An awesome README template to jumpstart your projects!
     <br />
-    <a href=""><strong>Api doc »</strong></a>
+    <a href="https://documenter.getpostman.com/view/23491723/2s93sc5D5A#intro"><strong>Api doc »</strong></a>
     <br />
     <br />
     <a href="###">View Demo</a>
@@ -184,7 +184,7 @@ Natours provides various functionalities/features to users through its backend A
     - Update Review
     - Delete Review
 
-_Note: The API documentation is available [here](###) for all the endpoints._
+_Note: The API documentation is available [here](https://documenter.getpostman.com/view/23491723/2s93sc5D5A#intro) for all the endpoints._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
