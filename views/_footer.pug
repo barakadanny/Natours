@@ -1,10 +1,28 @@
-footer.footer
-    .footer__logo
-        img(src='img/logo-green.png' alt='Natours logo')
-    ul.footer__nav
-        li: a(href="#") About us
-        li: a(href="#") Download apps
-        li: a(href="#") Become a guide
-        li: a(href="#") Careers
-        li: a(href="#") Contact
-    p.footer__copyright &copy; by Baraka . All rights reserved.
+footer(class='py-10 bg-gray-50 border border-t-gray-200 sm:pt-16 lg:pt-24')
+    div(class='px-4 mx-auto sm:px-6 lg:px-8 max-w-5xl')
+        div(class='grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12')
+            div(class='col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8')
+                img(src="img/Logo.png", alt="logo img")
+                p(class='text-base leading-relaxed text-colorSlate mt-7') Book your trip in minute, get full Control for much longer.
+
+            
+            div
+                p(class='text-sm font-bold tracking-widest text-colorMidnightBlue uppercase') Company
+                ul.mt-6.space-y-4
+                    li: a(href="#" class='flex text-base text-colorSlate transition-all duration-200 hover:text-blue-600 focus:text-blue-600') Tours
+                    li: a(href="#" class='flex text-base text-colorSlate transition-all duration-200 hover:text-blue-600 focus:text-blue-600') About
+                    li: a(href="#" class='flex text-base text-colorSlate transition-all duration-200 hover:text-blue-600 focus:text-blue-600') Career
+            
+            div
+                p(class='text-sm font-bold tracking-widest text-colorMidnightBlue uppercase') Contact
+                ul.mt-6.space-y-4
+                    li: a(href="#" class='flex text-base text-colorSlate transition-all duration-200 hover:text-blue-600 focus:text-blue-600') Help/FAQ
+                    li: a(href="#" class='flex text-base text-colorSlate transition-all duration-200 hover:text-blue-600 focus:text-blue-600') Press
+                    li: a(href="#" class='flex text-base text-colorSlate transition-all duration-200 hover:text-blue-600 focus:text-blue-600') Affiliate
+                
+            div(class='col-span-2 md:col-span-1 lg:col-span-2 lg:pl-8')
+                p(class='text-sm font-bold tracking-widest text-colorMidnightBlue uppercase') Discover our app
+            
+        hr(class='mt-16 mb-10 border-gray-200')
+
+        p(class='text-sm text-center text-colorSlate') © Copyright 2023, All Rights Reserved by Baraka Danny
