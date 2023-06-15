@@ -10,14 +10,14 @@
   <p align="center">
     An awesome README template to jumpstart your projects!
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://documenter.getpostman.com/view/23491723/2s93sc5D5A#intro"><strong>Api doc »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="###">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/barakadanny/Natours-Nodejs-Express/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/barakadanny/Natours-Nodejs-Express/issues">Request Feature</a>
   </p>
 </div>
 
@@ -41,7 +41,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#future">Future Features</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -55,8 +55,6 @@
 ## About The Project
 
 Natours is a full-stack web application built with Node.js, Express.js, and MongoDB. It provides users with the ability to register, login, navigate tours, review tours, book tours, and make payments. This documentation aims to guide you through the installation, configuration, and usage of the Natours application.
-
-Use the `BLANK_README.md` to get started.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -186,14 +184,14 @@ Natours provides various functionalities/features to users through its backend A
     - Update Review
     - Delete Review
 
-_Note: The API documentation is available [here](###) for all the endpoints._
+_Note: The API documentation is available [here](https://documenter.getpostman.com/view/23491723/2s93sc5D5A#intro) for all the endpoints._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 <!-- ROADMAP -->
-## Future Features
+##  ❓ Future Features  <a name="future"></a>
 
 - [ ] Save tours to wishlist
 - [ ] Offer discount coupons
@@ -250,20 +248,20 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## ❓ FAQ  <a name="faq"></a>
 
-#### What is the purpose of this project?
+1. #### What is the purpose of this project?
 
-This project is a part of my portfolio. It was created to showcase a full backend API built with Node.js, Express, MongoDB, and Mongoose.
+> This project is a part of my portfolio. It was created to showcase a full backend API built with Node.js, Express, MongoDB, and Mongoose.
 
-#### Can I contribute to this project?
+2. #### Can I contribute to this project?
 
-Yes, you can. Just fork the repository, make your changes and create a pull request. Your pull request will be reviewed and merged if it adds value to the project.
+> Yes, you can. Just fork the repository, make your changes and create a pull request. Your pull request will be reviewed and merged if it adds value to the project.
 
-#### Who can I talk to if I have questions?
+3. #### Who can I talk to if I have questions?
 
-If you have any questions regarding this project, feel free to reach out to me at _barakadan421@gmail.com_
+> If you have any questions regarding this project, feel free to reach out to me at _barakadan421@gmail.com_
 
-#### I found a bug/issue, what do I do?
+4. #### I found a bug/issue, what do I do?
 
-Report it in the issues section and I will look into it.
+> Report it in the issues section and I will look into it.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
