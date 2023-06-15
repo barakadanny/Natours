@@ -27,6 +27,9 @@ html {
   box-sizing: border-box;
 }
 
+/* TODO: refactor this file */
+/* * Use: variables for numbers and units */
+
 body {
   line-height: 1.6;
   font-weight: 300;
