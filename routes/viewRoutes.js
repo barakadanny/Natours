@@ -3,9 +3,9 @@ const { getHomeTours, getOverview, getTour } = require('../controllers/viewsCont
 
 const router = express.Router();
 
-router.get('/', getHomeTours)
+router.get('/tours', getHomeTours)
 
-router.get('/tours', getOverview)
+router.get('/', getOverview)
 
 router.get('/tour', getTour)
 
