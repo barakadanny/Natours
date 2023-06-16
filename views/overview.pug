@@ -27,46 +27,47 @@ block content
 
                 div(class='relative mt-12 lg:mt-20')
                     div(class='relative grid grid-cols-1 gap-y-12 md:grid-cols-3 gap-x-10')
-                        //- CARD: 1
-                        div(class='overflow-hidden bg-white rounded-xl shadow')
-                            div.relative
-                                a(href="#" class='block aspect-w-4 aspect-h-3')
-                                    img(src="img/tours/tour-1-1.jpg", alt="img", class='object-cover w-full h-full')
-                            div.pb-5.px-5
-                                div
-                                    span(class='block mt-6 text-xs font-semibold tracking-widest text-gray-500 uppercase') MEDIUM 7-DAY TOUR 
-                                    p(class='text-colorParagraphPrimary text-sm mt-3') Exploring the jaw-dropping US east coast by foot and by boat
-
-                                div(class='flex justify-between mt-5 text-sm')
-                                    div.flex.gap-2.items-center
-                                        svg(class='h-4 w-4 fill-colorCoral')
-                                            use(xlink:href='img/icons.svg#icon-map-pin')
-                                        span(class='text-colorTitleSmall') Oregon, US
-                                    div.flex.gap-2.items-center
-                                        svg(class='h-4 w-4 fill-colorCoral')
-                                            use(xlink:href='img/icons.svg#icon-calendar')
-                                        span(class='text-colorTitleSmall') June 2021
-
-                                div(class='flex justify-between mt-2 text-sm')
-                                    div.flex.gap-2.items-center
-                                        svg(class='h-4 w-4 fill-colorCoral')
-                                            use(xlink:href='img/icons.svg#icon-flag')
-                                        span(class='text-colorTitleSmall') 4 stops
-                                    div.flex.gap-2.items-center
-                                        svg(class='h-4 w-4 fill-colorCoral')
-                                            use(xlink:href='img/icons.svg#icon-user')
-                                        span(class='text-colorTitleSmall') 15 people
-                                
-                                div.flex.justify-between.text-sm.mt-5.bg-gray-200.items-center.p-2.rounded-xl
-                                    div.flex.flex-col
-                                        span.text-colorParagraphPrimary.mb-1.font-extrabold $ 300
-                                            | 
-                                            span.text-colorParagraphPrimary.mb-1.font-normal per person
-                                        span.text-colorParagraphPrimary.mb-1.font-extrabold 4.3 
-                                            | 
-                                            span.text-colorParagraphPrimary.mb-1.font-normal rating(7)
-                                    
+                        each tour in tours
+                            div(class='overflow-hidden bg-white rounded-xl shadow')
+                                div.relative
+                                    a(href="#" class='block aspect-w-4 aspect-h-3')
+                                        img(src=`img/tours/${tour.imageCover}`, alt="img", class='object-cover w-full h-full')
+                                div.pb-5.px-5
                                     div
-                                        a(href="" class='bg-colorNavy rounded-2xl px-5 py-2 text-colorWhite text-sm') View
+                                        span(class='block mt-6 text-xs font-semibold tracking-widest text-gray-500 uppercase')= `${tour.difficulty} ${tour.duration}-day tour`
+                                        p(class='text-colorParagraphPrimary text-sm mt-3')= tour.summary
+
+                                    div(class='flex justify-between mt-5 text-sm')
+                                        div.flex.gap-2.items-center
+                                            svg(class='h-4 w-4 fill-colorCoral')
+                                                use(xlink:href='img/icons.svg#icon-map-pin')
+                                            span(class='text-colorTitleSmall')= tour.startLocation.description
+                                        div.flex.gap-2.items-center
+                                            svg(class='h-4 w-4 fill-colorCoral')
+                                                use(xlink:href='img/icons.svg#icon-calendar')
+                                            span(class='text-colorTitleSmall')= tour.startDates[0].toLocaleString('en-us', {month: 'short', year: 'numeric'})
+
+                                    div(class='flex justify-between mt-2 text-sm')
+                                        div.flex.gap-2.items-center
+                                            svg(class='h-4 w-4 fill-colorCoral')
+                                                use(xlink:href='img/icons.svg#icon-flag')
+                                            span(class='text-colorTitleSmall')= `${tour.locations.length} stops`
+                                        div.flex.gap-2.items-center
+                                            svg(class='h-4 w-4 fill-colorCoral')
+                                                use(xlink:href='img/icons.svg#icon-user')
+                                            span(class='text-colorTitleSmall')= `${tour.maxGroupSize} people`
+                                    
+                                    div.mt-5
+                                        div.flex.justify-between.text-sm.bg-gray-200.items-center.p-2.rounded-xl
+                                            div.flex.flex-col
+                                                span.text-colorParagraphPrimary.mb-1.font-extrabold= `$${tour.price}`
+                                                    | 
+                                                    span.text-colorParagraphPrimary.mb-1.font-normal per person
+                                                span.text-colorParagraphPrimary.mb-1.font-extrabold= `rating (${tour.ratingsQuantity})`
+                                                    | 
+                                                    span.text-colorParagraphPrimary.mb-1.font-normal rating(7)
+                                            
+                                            div
+                                                a(href=`/tours/${tour.slug}` class='bg-colorNavy rounded-2xl px-5 py-2 text-colorWhite text-sm') View
 
                             
