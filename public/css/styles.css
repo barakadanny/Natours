@@ -580,9 +580,6 @@ video {
 .max-w-5xl {
   max-width: 64rem;
 }
-.max-w-7xl {
-  max-width: 80rem;
-}
 .max-w-lg {
   max-width: 32rem;
 }
@@ -660,6 +657,10 @@ video {
 .border-t-gray-200 {
   --tw-border-opacity: 1;
   border-top-color: rgb(229 231 235 / var(--tw-border-opacity));
+}
+.bg-colorCoral {
+  --tw-bg-opacity: 1;
+  background-color: rgb(223 105 81 / var(--tw-bg-opacity));
 }
 .bg-gray-50 {
   --tw-bg-opacity: 1;
@@ -745,10 +746,6 @@ video {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
 }
 .text-xs {
   font-size: 0.75rem;
