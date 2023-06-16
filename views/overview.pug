@@ -63,9 +63,9 @@ block content
                                                 span.text-colorParagraphPrimary.mb-1.font-extrabold= `$${tour.price}`
                                                     | 
                                                     span.text-colorParagraphPrimary.mb-1.font-normal per person
-                                                span.text-colorParagraphPrimary.mb-1.font-extrabold= `rating (${tour.ratingsQuantity})`
+                                                span.text-colorParagraphPrimary.mb-1.font-extrabold= tour.ratingsAverage
                                                     | 
-                                                    span.text-colorParagraphPrimary.mb-1.font-normal rating(7)
+                                                    span.text-colorParagraphPrimary.mb-1.font-normal= `rating (${tour.ratingsQuantity})`
                                             
                                             div
                                                 a(href=`/tours/${tour.slug}` class='bg-colorNavy rounded-2xl px-5 py-2 text-colorWhite text-sm') View
