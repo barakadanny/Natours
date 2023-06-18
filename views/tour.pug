@@ -1,5 +1,13 @@
 extends base
 
+mixin overviewBox(label, text, icon)
+    div.mt-5.flex.gap-2.items-center
+        svg(class='h-4 w-4 fill-colorCoral')
+            use(xlink:href=`/img/icons.svg#icon-${icon}`)
+        div.flex.gap-4.text-sm.text-colorSlate
+            span.font-bold.uppercase= label
+            span= text
+
 block content
     section(class='pt-10 overflow-hidden md:pt-0 sm:pt-16 2xl:pt-16')
         div(class='px-4 mx-auto sm:px-6 lg:px-8 max-w-5xl')
@@ -29,6 +37,12 @@ block content
                 div
                     div
                         h2(class='text-base font-semibold text-colorTitleBig uppercase') Quick facts
+                        div.mt-3.mb-5
+                            - const date = tour.startDates[0].toLocaleString('en-us', {month: 'short', year: 'numeric'})
+                            +overviewBox('Next date', date, 'calendar')
+                            +overviewBox('Difficulty', tour.difficulty, 'trending-up')
+                            +overviewBox('Participants', `${tour.maxGroupSize} people`, 'user')
+                            +overviewBox('Rating', `${tour.ratingsAverage} / 5`, 'star')
 
 
                     div
