@@ -45,8 +45,18 @@ block content
                             +overviewBox('Rating', `${tour.ratingsAverage} / 5`, 'star')
 
 
-                    div
+                    div.mt-10
                         h2(class='text-base font-semibold text-colorTitleBig uppercase') Your tour guides
+                        div.mt-3.mb-5
+                            each guide in tour.guides
+                                div.flex.gap-2.items-center.mt-4
+                                    img(src=`/img/users/${guide.photo}`, alt=`${guide.name}`, class='w-7 h-7 rounded-full')
+                                    div.flex.gap-4.text-sm.text-colorSlate
+                                        - if (guide.role === 'lead-guide')
+                                            span.font-bold.uppercase Lead Guide
+                                        - if (guide.role === 'guide')
+                                            span.font-bold.uppercase Guide
+                                        p= guide.name
 
                 div
                     h3(class='text-base font-semibold text-colorTitleBig uppercase') About the park camper tour
