@@ -3,10 +3,10 @@ const { getHomeTours, getOverview, getTour } = require('../controllers/viewsCont
 
 const router = express.Router();
 
-router.get('/tours', getHomeTours)
+router.get('/', getHomeTours)
 
-router.get('/', getOverview)
+router.get('/tours', getOverview)
 
-router.get('/tour', getTour)
+router.get('/tour/:slug', getTour)
 
 module.exports = router
