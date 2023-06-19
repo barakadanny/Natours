@@ -1,5 +1,17 @@
 extends base
 
+mixin reviewCard(review)
+    div(class='max-w-[15rem] bg-gray-100 p-5')
+        div.flex.gap-3.mb-5
+            img(src=`/img/users/${review.user.photo}`, alt=`${review.user.name}`, class='w-7 h-7 rounded-full')
+            h6= review.user.name
+        p.text-sm.text-colorParagraphPrimary.mb-5= review.review
+        div.flex.items-center.justify-center
+            each star in [1, 2, 3, 4, 5]
+                svg(style=`height: 1rem; width: 1rem; margin-right: 0.5rem; cursor: pointer; fill: ${review.rating >= star ? '#F1A501' : '#5E6282'};`)
+                    use(xlink:href='/img/icons.svg#icon-star')
+
+
 mixin overviewBox(label, text, icon)
     div.mt-5.flex.gap-2.items-center
         svg(class='h-4 w-4 fill-colorCoral')
@@ -32,7 +44,7 @@ block content
                                         use(xlink:href='/img/icons.svg#icon-map-pin')
                                     span.text-gray-400.text-sm= tour.startLocation.description
 
-            //- * SECTION:
+            //- * SECTION: Tour Details
             div(class='grid grid-cols-1 my-8 md:mt-10 gap-y-6 md:grid-cols-2 gap-x-10')
                 div.bg-gray-50.p-5
                     div
@@ -64,8 +76,16 @@ block content
                     each paragraph in parapraphs
                         p(class='mt-4 text-sm text-colorParagraphPrimary')= paragraph
             
-            div
-                section(class='flex')
+            //- * SECTION: Tour Gallery
+            section
+                div(class='flex')
                     each img, i in tour.images
                         div.relative.z-10
                             img.picture-box__img(src=`/img/tours/${img}`, alt=`The Park Camper Tour ${i + 1}`)
+            
+            //- * SECTION: Tour Reviews
+            section.mt-8 
+                div(class='overflow-x-scroll bg-gray-200 py-16 pl-5 scrollbar-hide md:scrollbar-default pr-8')
+                    div(class='flex flex-row w-max gap-3')
+                        each review in tour.reviews
+                            +reviewCard(review)
