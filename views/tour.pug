@@ -8,7 +8,7 @@ mixin reviewCard(review)
         p.text-sm.text-colorParagraphPrimary.mb-5= review.review
         div.flex.items-center.justify-center
             each star in [1, 2, 3, 4, 5]
-                svg(style=`height: 1rem; width: 1rem; margin-right: 0.5rem; cursor: pointer; fill: ${review.rating >= star ? '#F1A501' : '#5E6282'};`)
+                svg(style=`height: 1rem; width: 1rem; margin-right: 0.5rem; cursor: pointer; fill: ${review.rating >= star ? '#DF6951' : '#5E6282'};`)
                     use(xlink:href='/img/icons.svg#icon-star')
 
 
@@ -89,3 +89,12 @@ block content
                     div(class='flex flex-row w-max gap-3')
                         each review in tour.reviews
                             +reviewCard(review)
+            
+            //- * SECTION: Cta
+            section.mt-8.py-5.px-5.bg-colorPalePeach
+                div(class='text-center lg:flex lg:items-center lg:justify-between lg:text-left')
+                    div
+                        h2(class='text-xl uppercase font-bold text-colorNavy lg:max-w-md') What are you waiting for?
+                        p.text-colorParagraphPrimary= `${tour.duration} days. 1 adventure. Infinite memories. Make it yours today!`
+                    div(class='px-10 mt-8 lg:mt-0 lg:px-0')
+                        a(href="" class='inline-flex uppercase items-center justify-center px-5 py-3 text-sm font-semibold text-white transition-all duration-200 bg-colorCoral rounded-3xl') Book tour now!
