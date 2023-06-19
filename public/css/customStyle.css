@@ -18,58 +18,6 @@
   --color-paragraph-primary: #5E6282;
 }
 
-::-moz-selection {
-  background-color: #55c57a;
-  color: #fff;
-}
-
-::selection {
-  background-color: #55c57a;
-  color: #fff;
-}
-
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-}
-
-html {
-  font-size: 62.5%;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-/* TODO: refactor this file */
-/* * Use: variables for numbers and units */
-
-body {
-  line-height: 1.6;
-  font-weight: 300;
-  font-family: 'Lato', sans-serif;
-  color: #777;
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.main {
-  background-color: #f7f7f7;
-  padding: 8rem 6rem;
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  position: relative;
-}
-
 .flex {
   display: -webkit-box;
   display: -ms-flexbox;
