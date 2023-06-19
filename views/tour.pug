@@ -1,7 +1,7 @@
 extends base
 
 mixin reviewCard(review)
-    div(class='max-w-[15rem] bg-gray-100 p-5')
+    div(class='max-w-[15rem] bg-gray-100 border border-gray-200 p-5')
         div.flex.gap-3.mb-5
             img(src=`/img/users/${review.user.photo}`, alt=`${review.user.name}`, class='w-7 h-7 rounded-full')
             h6= review.user.name
@@ -85,7 +85,7 @@ block content
             
             //- * SECTION: Tour Reviews
             section.mt-8 
-                div(class='overflow-x-scroll bg-gray-200 py-16 pl-5 scrollbar-hide md:scrollbar-default pr-8')
+                div(class='overflow-x-scroll bg-gray-50 py-16 pl-5 scrollbar-hide md:scrollbar-default pr-8')
                     div(class='flex flex-row w-max gap-3')
                         each review in tour.reviews
                             +reviewCard(review)
