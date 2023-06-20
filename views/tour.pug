@@ -1,5 +1,10 @@
 extends base
 
+block append head
+    script(src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js')
+    link(href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' )
+
+
 mixin reviewCard(review)
     div(class='max-w-[15rem] bg-gray-100 border border-gray-200 p-5')
         div.flex.gap-3.mb-5
@@ -98,3 +103,9 @@ block content
                         p.text-colorParagraphPrimary= `${tour.duration} days. 1 adventure. Infinite memories. Make it yours today!`
                     div(class='px-10 mt-8 lg:mt-0 lg:px-0')
                         a(href="" class='inline-flex uppercase items-center justify-center px-5 py-3 text-sm font-semibold text-white transition-all duration-200 bg-colorCoral rounded-3xl') Book tour now!
+
+            //- * SECTION: Map
+            //- ! TODO: Fix map, not displaying
+            section.mt-8
+                div(class='')
+                    #map(data-locations=`${JSON.stringify(tour.locations)}`)
