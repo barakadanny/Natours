@@ -8,7 +8,9 @@
     "build:css": "postcss public/css/tailwind.css -o public/css/styles.css",
     "dev": "nodemon server.js",
     "prod": "NODE_ENV=production nodemon server.js",
-    "debug": "ndb server.js"
+    "debug": "ndb server.js",
+    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
+    "wbuild:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
   "author": "Baraka Danny",
   "license": "ISC",
