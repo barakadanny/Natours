@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet'); // set security HTTP headers
@@ -21,7 +22,19 @@ app.set('views', path.join(__dirname, 'views'))
 
 // 1) GLOBAL MIDDLEWARES
 // * Set security HTTP headers
+app.use(cors());
 app.use(helmet());
+
+app.use(
+  helmet.contentSecurityPolicy({
+      directives: {
+
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"],
+        connectSrc: ["'self'", "http://127.0.0.1:3000"]
+      },
+  })
+);
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
