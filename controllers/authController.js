@@ -88,7 +88,7 @@ const protect = catchAsync(async(req, res, next) => {
     }
 
     // 4) Check if user changed password after the token was issued
-    // Why do we need this? 
+    // *Why do we need this?
     // Because we want to make sure that if someone stole the token, they can't use it to log in again after the user changed the password
     if(currentUser.changedPasswordAfter(decoded.iat)) {
         return next(new AppError('User recently changed password! Please log in again.', 401));
@@ -96,6 +96,31 @@ const protect = catchAsync(async(req, res, next) => {
 
     // GRANT ACCESS TO PROTECTED ROUTE when all above conditions are met
     req.user = currentUser; // we can use this user data in the next middleware
+    next();
+});
+
+// *Only for rendered pages, no error messages
+const isLoggedIn = catchAsync(async(req, res, next) => {
+    let token;
+    if(req.cookies.jwt) {
+        //* 1) Verify token
+        const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
+
+        //* 2) Check if user still exists
+        const currentUser = await User.findById(decoded.id);
+        if(!currentUser) {
+            return next();
+        }
+
+        // *3) Check if user changed password after the token was issued
+        if(currentUser.changedPasswordAfter(decoded.iat)) {
+            return next();
+        }
+
+        //* THERE IS A LOGGED IN USER
+        res.locals.user = currentUser
+        return next();
+    }
     next();
 });
 
@@ -201,5 +226,6 @@ module.exports = {
     restrictTo,
     forgotPassword,
     resetPassword,
-    updatePassword
+    updatePassword,
+    isLoggedIn
 }
