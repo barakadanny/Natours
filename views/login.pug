@@ -11,19 +11,19 @@ block content
                             h2(class='text-3xl font-bold text-gray-900') Welcome back
                             p(class='mt-2 text-base text-gray-600') Don’t have one?
                         
-                        form.mt-8
+                        form.mt-8.form
                             .space-y-5
                                 div
                                     label.text-base.font-medium.text-gray-900(for='email') Email address
                                     .mt-2
-                                        input(class='block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600', type='email', placeholder='Email address', required='')
+                                        input(id='email', class='block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600', type='email', placeholder='Email address', required='')
                                     
                                 div 
                                     div(class='flex items-center justify-between')
                                         label.text-base.font-medium.text-gray-900(for='password') Password
                                         a(class='text-sm font-medium transition-all duration-200 text-rose-500 hover:text-rose-600 focus:text-rose-600 hover:underline') Forgot your password?
                                     .mt-2
-                                        input(class='block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600', type='password', placeholder='Password', required='')
+                                        input(id='password', class='block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600', type='password', placeholder='Password', required='')
                                 
                                 div
-                                    button(class='inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700') Login
+                                    button(type="submit" class='inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700') Login
