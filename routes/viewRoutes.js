@@ -1,7 +1,10 @@
 const express = require('express');
 const { getHomeTours, getOverview, getTour, getLoginForm } = require('../controllers/viewsController');
+const { isLoggedIn } = require('../controllers/authController')
 
 const router = express.Router();
+
+router.use(isLoggedIn)
 
 router.get('/', getHomeTours)
 
