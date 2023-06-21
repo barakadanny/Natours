@@ -7,7 +7,12 @@ div
                         img(src="/img/Logo.png", alt="logo", class='h-[1.5rem]')
                 div(class='hidden ml-auto lg:flex lg:items-center lg:justify-center lg:space-x-10')
                     a(href=`/` class='text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80') Home
-                    a(href=`/tours/` class='text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80') Tours 
-                    a(href="#" class='text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80') About us 
-                    a(href="/login" class='text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80') Log in
-                    a(href="/signup" class='inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold text-black border-2 border-black hover:bg-black hover:text-white transition-all duration-200 focus:bg-black focus:text-white') Sign up
+                    a(href=`/tours/` class='text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80') Tours
+                    if user
+                        a(href="#" class='text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80') Log out
+                        a(href="#" class='text-base items-center flex gap-2 font-semibold text-black transition-all duration-200 hover:text-opacity-80')
+                            img(src=`/img/users/${user.photo}`, alt=`${user.name}`, class='w-7 h-7 rounded-full')
+                            span(class='text-sm font-semibold text-black transition-all duration-200 hover:text-opacity-80')= user.name.split(' ')[0]
+                    else
+                        a(href="/login" class='text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80') Log in
+                        a(href="/signup" class='inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold text-black border-2 border-black hover:bg-black hover:text-white transition-all duration-200 focus:bg-black focus:text-white') Sign up
