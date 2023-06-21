@@ -7,6 +7,7 @@ const helmet = require('helmet'); // set security HTTP headers
 const mongoSanitize = require('express-mongo-sanitize'); // sanitize user input from malicious MongoDB operators
 const xss = require('xss-clean'); // clean user input from malicious HTML code
 const hpp = require('hpp'); // prevent HTTP parameter pollution
+const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -31,7 +32,7 @@ app.use(
 
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"],
-        connectSrc: ["'self'", "http://127.0.0.1:3000"]
+        connectSrc: ["'self'", "http://localhost"]
       },
   })
 );
@@ -51,6 +52,7 @@ app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' })); // limit the size of the body to 10kb
+app.use(cookieParser()); // parse the cookie header and body into req.body and req.headers
 
 // Data sanitization against NoSQL query injection 
 // (e.g. { "email": { "$gt": "" }, "password": "password1234" })
@@ -80,6 +82,7 @@ app.use(express.static(`${__dirname}/public`));
 // Test middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
+  console.log(req.cookies)
   next();
 });
 
