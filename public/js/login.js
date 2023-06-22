@@ -1,6 +1,5 @@
-
+// TODO: Use pop up to display messages
 const login = async (email, password) => {
-    console.log(email, password);
     try{
         const res = await axios({
             method: 'POST',
@@ -10,8 +9,15 @@ const login = async (email, password) => {
                 password
             }
         });
+
+        if(res.data.status === "success") {
+            alert('Logged in successfully!')
+            window.setTimeout(() => {
+                location.assign('/tours')
+            }, 1500)
+        }
     } catch(err) {
-        console.log(err.response.data);
+        alert(err.response.data.message);
     }
 }
 
