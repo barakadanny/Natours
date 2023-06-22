@@ -1,10 +1,13 @@
 import { login } from './login'
 
-document.querySelector('.form').addEventListener('submit', e => {
-    e.preventDefault();
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
+// DOM elements
+const loginForm = document.querySelector('.form')
 
-    login(email, password);
-    
-})
+if (loginForm)
+    loginForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = document.querySelector('#email').value;
+        const password = document.querySelector('#password').value;
+        login(email, password);
+        
+    })
