@@ -1,5 +1,5 @@
 // TODO: Use pop up to display messages
-const login = async (email, password) => {
+export const login = async (email, password) => {
     try{
         const res = await axios({
             method: 'POST',
@@ -20,13 +20,3 @@ const login = async (email, password) => {
         alert(err.response.data.message);
     }
 }
-
-
-document.querySelector('.form').addEventListener('submit', e => {
-    e.preventDefault();
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
-
-    login(email, password);
-    
-})
