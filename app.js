@@ -1,22 +1,42 @@
+const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet'); // set security HTTP headers
 const mongoSanitize = require('express-mongo-sanitize'); // sanitize user input from malicious MongoDB operators
 const xss = require('xss-clean'); // clean user input from malicious HTML code
 const hpp = require('hpp'); // prevent HTTP parameter pollution
+const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'))
+
 // 1) GLOBAL MIDDLEWARES
-// Set security HTTP headers
+// * Set security HTTP headers
+app.use(cors());
 app.use(helmet());
+
+app.use(
+  helmet.contentSecurityPolicy({
+      directives: {
+
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"],
+        connectSrc: ["'self'", "http://localhost"],
+        connectSrc: ["'self'", "ws://localhost:59242/"]
+      },
+  })
+);
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -33,6 +53,7 @@ app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' })); // limit the size of the body to 10kb
+app.use(cookieParser()); // parse the cookie header and body into req.body and req.headers
 
 // Data sanitization against NoSQL query injection 
 // (e.g. { "email": { "$gt": "" }, "password": "password1234" })
@@ -62,10 +83,13 @@ app.use(express.static(`${__dirname}/public`));
 // Test middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
+  console.log(req.cookies)
   next();
 });
 
 // 3) ROUTES
+app.use('/', viewRouter)
+
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);

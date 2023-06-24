@@ -1,0 +1,111 @@
+extends base
+
+block append head
+    script(src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js')
+    link(href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' )
+
+
+mixin reviewCard(review)
+    div(class='max-w-[15rem] bg-gray-100 border border-gray-200 p-5')
+        div.flex.gap-3.mb-5
+            img(src=`/img/users/${review.user.photo}`, alt=`${review.user.name}`, class='w-7 h-7 rounded-full')
+            h6= review.user.name
+        p.text-sm.text-colorParagraphPrimary.mb-5= review.review
+        div.flex.items-center.justify-center
+            each star in [1, 2, 3, 4, 5]
+                svg(style=`height: 1rem; width: 1rem; margin-right: 0.5rem; cursor: pointer; fill: ${review.rating >= star ? '#DF6951' : '#5E6282'};`)
+                    use(xlink:href='/img/icons.svg#icon-star')
+
+
+mixin overviewBox(label, text, icon)
+    div.mt-5.flex.gap-2.items-center
+        svg(class='h-4 w-4 fill-colorCoral')
+            use(xlink:href=`/img/icons.svg#icon-${icon}`)
+        div.flex.gap-4.text-sm.text-colorSlate
+            span.font-bold.uppercase= label
+            span= text
+
+block content
+    section(class='py-10 overflow-hidden sm:pt-16 2xl:pt-16')
+        div(class='px-4 mx-auto sm:px-6 lg:px-8 max-w-5xl')
+            //- * SECTION: hero
+            div(class='relative py-10 overflow-hidden bg-black sm:py-12 lg:py-24 xl:py-16')
+                div(class='px-4 mx-auto sm:px-6 lg:px-8 max-w-5xl')
+                    div(class='absolute inset-0')
+                        img(src=`/img/tours/${tour.imageCover}`, alt=`${tour.name}`)
+                    div(class='absolute inset-0 hidden bg-gradient-to-r md:block from-black to-transparent')
+                    div(class='absolute inset-0 block bg-black/60 md:hidden')
+                    div(class='relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl')
+                        div(class='text-center md:w-2/3 lg:w-1/2 xl:w-1/3 md:text-left')
+                            h2(class='text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Get full access to Celebration')= tour.name
+                            div.mt-5
+                                div.flex.gap-2
+                                    svg(class='h-4 w-4 fill-colorCoral')
+                                        use(xlink:href='/img/icons.svg#icon-clock')
+                                    span.text-gray-400.text-sm= `${tour.duration} days`
+
+                                div.flex.gap-2.mt-1
+                                    svg(class='h-4 w-4 fill-colorCoral')
+                                        use(xlink:href='/img/icons.svg#icon-map-pin')
+                                    span.text-gray-400.text-sm= tour.startLocation.description
+
+            //- * SECTION: Tour Details
+            div(class='grid grid-cols-1 my-8 md:mt-10 gap-y-6 md:grid-cols-2 gap-x-10')
+                div.bg-gray-50.p-5
+                    div
+                        h2(class='text-base font-semibold text-colorTitleBig uppercase') Quick facts
+                        div.mt-3.mb-5
+                            - const date = tour.startDates[0].toLocaleString('en-us', {month: 'short', year: 'numeric'})
+                            +overviewBox('Next date', date, 'calendar')
+                            +overviewBox('Difficulty', tour.difficulty, 'trending-up')
+                            +overviewBox('Participants', `${tour.maxGroupSize} people`, 'user')
+                            +overviewBox('Rating', `${tour.ratingsAverage} / 5`, 'star')
+
+
+                    div.mt-10
+                        h2(class='text-base font-semibold text-colorTitleBig uppercase') Your tour guides
+                        div.mt-3.mb-5
+                            each guide in tour.guides
+                                div.flex.gap-2.items-center.mt-4
+                                    img(src=`/img/users/${guide.photo}`, alt=`${guide.name}`, class='w-7 h-7 rounded-full')
+                                    div.flex.gap-4.text-sm.text-colorSlate
+                                        - if (guide.role === 'lead-guide')
+                                            span.font-bold.uppercase Lead Guide
+                                        - if (guide.role === 'guide')
+                                            span.font-bold.uppercase Guide
+                                        p= guide.name
+
+                div
+                    h3(class='text-base font-semibold text-colorTitleBig uppercase')= `About ${tour.name} tour`
+                    - const parapraphs = tour.description.split('\n');
+                    each paragraph in parapraphs
+                        p(class='mt-4 text-sm text-colorParagraphPrimary')= paragraph
+            
+            //- * SECTION: Tour Gallery
+            section
+                div(class='flex')
+                    each img, i in tour.images
+                        div.relative.z-10
+                            img.picture-box__img(src=`/img/tours/${img}`, alt=`The Park Camper Tour ${i + 1}`)
+            
+            //- * SECTION: Tour Reviews
+            section.mt-8 
+                div(class='overflow-x-scroll bg-gray-50 py-16 pl-5 scrollbar-hide md:scrollbar-default pr-8')
+                    div(class='flex flex-row w-max gap-3')
+                        each review in tour.reviews
+                            +reviewCard(review)
+            
+            //- * SECTION: Cta
+            section.mt-8.py-5.px-5.bg-colorPalePeach
+                div(class='text-center lg:flex lg:items-center lg:justify-between lg:text-left')
+                    div
+                        h2(class='text-xl uppercase font-bold text-colorNavy lg:max-w-md') What are you waiting for?
+                        p.text-colorParagraphPrimary= `${tour.duration} days. 1 adventure. Infinite memories. Make it yours today!`
+                    div(class='px-10 mt-8 lg:mt-0 lg:px-0')
+                        a(href="" class='inline-flex uppercase items-center justify-center px-5 py-3 text-sm font-semibold text-white transition-all duration-200 bg-colorCoral rounded-3xl') Book tour now!
+
+            //- * SECTION: Map
+            //- ! TODO: Fix map, not displaying
+            section.mt-8
+                div(class='')
+                    #map(data-locations=`${JSON.stringify(tour.locations)}`)
