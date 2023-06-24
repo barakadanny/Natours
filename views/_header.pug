@@ -10,7 +10,7 @@ div
                     a(href=`/tours/` class='text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80') Tours
                     if user
                         a(href="#" class='logoutBtn text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80') Log out
-                        a(href="#" class='text-base items-center flex gap-2 font-semibold text-black transition-all duration-200 hover:text-opacity-80')
+                        a(href="/me" class='text-base items-center flex gap-2 font-semibold text-black transition-all duration-200 hover:text-opacity-80')
                             img(src=`/img/users/${user.photo}`, alt=`${user.name}`, class='w-7 h-7 rounded-full')
                             span(class='text-sm font-semibold text-black transition-all duration-200 hover:text-opacity-80')= user.name.split(' ')[0]
                     else
