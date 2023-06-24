@@ -1,46 +1,31 @@
 extends base
 
+mixin navItem(link, text, icon, active)
+    li: a(href=`${link}` class='flex gap-3 items-center text-sm uppercase mb-3 text-gray-900 p-2 transition duration-150 hover:ease-in hover:bg-gray-200') 
+        svg(class='w-4 h-4')
+            use(xlink:href=`img/icons.svg#icon-${icon}`)
+        | #{text}
+
 block content
     section(class='py-10 overflow-hidden')
         div(class='px-4 mx-auto sm:px-6 lg:px-8 max-w-5xl')
             div(class='grid grid-cols-1 my-8 md:mt-10 gap-y-6 md:grid-cols-3 gap-x-2')
-                //- div(class='grid grid-cols-3 gap-4')
                 div(class='bg-gray-50 p-5')
-                    div.mb-5
+                    div.mb-10
                         ul
-                            li: a(href="#" class='flex gap-3 items-center text-sm uppercase mb-3 text-gray-900 p-2 transition duration-150 hover:ease-in hover:bg-gray-200') 
-                                svg(class='w-4 h-4')
-                                    use(xlink:href='img/icons.svg#icon-settings')
-                                | Settings
-                            li: a(href="#" class='flex gap-3 items-center text-sm uppercase mb-3 text-gray-900 p-2 transition duration-150 hover:ease-in hover:bg-gray-200') 
-                                svg(class='w-4 h-4')
-                                    use(xlink:href='img/icons.svg#icon-briefcase')
-                                | My bookings
-                            li: a(href="#" class='flex gap-3 items-center text-sm uppercase mb-3 text-gray-900 p-2 transition duration-150 hover:ease-in hover:bg-gray-200') 
-                                svg(class='w-4 h-4')
-                                    use(xlink:href='img/icons.svg#icon-star')
-                                | My reviews
-                            li: a(href="#" class='flex gap-3 items-center text-sm uppercase mb-3 text-gray-900 p-2 transition duration-150 hover:ease-in hover:bg-gray-200') 
-                                svg(class='w-4 h-4')
-                                    use(xlink:href='img/icons.svg#icon-credit-card')
-                                | Billing
-                    
-                    div
-                        h5(class='uppercase text-sm') Admin
-                        hr(class='mb-3')
-                        ul
-                            li: a(href="#" class='flex gap-3 items-center text-sm uppercase mb-3 text-gray-900 p-2 transition duration-150 hover:ease-in hover:bg-gray-200') 
-                                svg(class='w-4 h-4')
-                                    use(xlink:href='img/icons.svg#icon-map')
-                                | Manage tours
-                            li: a(href="#" class='flex gap-3 items-center text-sm uppercase mb-3 text-gray-900 p-2 transition duration-150 hover:ease-in hover:bg-gray-200') 
-                                svg(class='w-4 h-4')
-                                    use(xlink:href='img/icons.svg#icon-users')
-                                | Manage users
-                            li: a(href="#" class='flex gap-3 items-center text-sm uppercase mb-3 text-gray-900 p-2 transition duration-150 hover:ease-in hover:bg-gray-200') 
-                                svg(class='w-4 h-4')
-                                    use(xlink:href='img/icons.svg#icon-star')
-                                | Manage reviews
+                            +navItem('#', 'settings', 'settings', true)
+                            +navItem('#', 'My bookings', 'briefcase', false)
+                            +navItem('#', 'My reviews', 'star', false)
+                            +navItem('#', 'Billing', 'credit-card', false)
+
+                    - if (user.role === 'admin')
+                        div
+                            h5(class='uppercase text-sm') Admin
+                            hr(class='mb-3')
+                            ul
+                                +navItem('#', 'Manage tours', 'map', false)
+                                +navItem('#', 'Manage users', 'users', false)
+                                +navItem('#', 'Manage reviews', 'star', false)
 
                 div(class='md:col-span-2 p-5 md:px-24')
                     div
