@@ -104,6 +104,7 @@ const protect = catchAsync(async(req, res, next) => {
 
     // GRANT ACCESS TO PROTECTED ROUTE when all above conditions are met
     req.user = currentUser; // we can use this user data in the next middleware
+    res.locals.user = currentUser;
     next();
 });
 
