@@ -37,6 +37,10 @@ exports.getTour = catchAsync(async(req, res, next) => {
 })
 
 exports.getLoginForm = catchAsync(async(req, res, next) => {
+    if (req.cookies.jwt) {
+        return res.redirect('/me');
+    }
+
     res
         .status(200)
         .render('login', {
