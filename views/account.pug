@@ -31,13 +31,13 @@ block content
                 div(class='md:col-span-2 p-5 md:px-24')
                     div
                         h2(class='mb-8 uppercase font-bold text-colorNavy') Your account settings
-                        form(action='')
+                        form.form-user-data
                             div.mb-5
                                 label(for='name', class='text-sm text-gray-700') Name
-                                input(type='text', value=`${user.name}`, class='block mt-2 text-sm w-full py-2 px-5 text-gray-900 placeholder-gray-500 transition-all duration-200 bg-gray-100 border border-gray-100 focus:outline-none focus:border-gray-500 caret-gray-500', required)
+                                input(type='text', value=`${user.name}`,id='name' , class='block mt-2 text-sm w-full py-2 px-5 text-gray-900 placeholder-gray-500 transition-all duration-200 bg-gray-100 border border-gray-100 focus:outline-none focus:border-gray-500 caret-gray-500', required)
                             div.mb-5
                                 label(for='name', class='text-sm text-gray-700') Email address 
-                                input(type='email', value=`${user.email}`, class='block mt-2 text-sm w-full py-2 px-5 text-gray-900 placeholder-gray-500 transition-all duration-200 bg-gray-100 border border-gray-100 focus:outline-none focus:border-gray-500 caret-gray-500', required)
+                                input(type='email', value=`${user.email}`,id='email' , class='block mt-2 text-sm w-full py-2 px-5 text-gray-900 placeholder-gray-500 transition-all duration-200 bg-gray-100 border border-gray-100 focus:outline-none focus:border-gray-500 caret-gray-500', required)
                             div(class='mb-5 flex items-center gap-5')
                                 img(src=`img/users/${user.photo}`, class='w-16 h-16 rounded-full', alt="User photo")
                                 a(href="") Choose new photo 
