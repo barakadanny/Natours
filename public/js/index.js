@@ -1,8 +1,10 @@
 import { login, logout } from './login'
+import { updateData } from './updateSettings'
 
 // DOM elements
 const loginForm = document.querySelector('.form')
 const logOutBtn = document.querySelector('.logoutBtn')
+const userDataForm = document.querySelector('.form-user-data')
 
 if (loginForm)
     loginForm.addEventListener('submit', e => {
@@ -14,3 +16,12 @@ if (loginForm)
     })
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
+
+if (userDataForm)
+    userDataForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const name = document.querySelector('#name').value;
+        const email = document.querySelector('#email').value;
+
+        updateData(name, email);
+    });
