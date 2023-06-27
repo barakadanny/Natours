@@ -1,5 +1,5 @@
 import { login, logout } from './login'
-import { updateData } from './updateSettings'
+import { updateSettings } from './updateSettings'
 
 // DOM elements
 const loginForm = document.querySelector('.form')
@@ -23,5 +23,5 @@ if (userDataForm)
         const name = document.querySelector('#name').value;
         const email = document.querySelector('#email').value;
 
-        updateData(name, email);
+        updateSettings({name, email}, 'data');
     });
