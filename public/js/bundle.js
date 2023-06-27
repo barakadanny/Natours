@@ -291,6 +291,7 @@ var _updateSettings = require("./updateSettings");
 var loginForm = document.querySelector('.form');
 var logOutBtn = document.querySelector('.logoutBtn');
 var userDataForm = document.querySelector('.form-user-data');
+var userPasswordForm = document.querySelector('.form-user-password');
 if (loginForm) loginForm.addEventListener('submit', function (e) {
   e.preventDefault();
   var email = document.querySelector('#email').value;
@@ -306,6 +307,17 @@ if (userDataForm) userDataForm.addEventListener('submit', function (e) {
     name: name,
     email: email
   }, 'data');
+});
+if (userPasswordForm) userDataForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  var passwordCurrent = document.querySelector('#password-current').value;
+  var password = document.querySelector('#password').value;
+  var passwordConfirm = document.querySelector('#password-confirm').value;
+  (0, _updateSettings.updateSettings)({
+    passwordCurrent: passwordCurrent,
+    password: password,
+    passwordConfirm: passwordConfirm
+  }, 'password');
 });
 },{"./login":"login.js","./updateSettings":"updateSettings.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -332,7 +344,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59122" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53904" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
