@@ -48,15 +48,15 @@ block content
 
                     div 
                         h2(class='mb-8 uppercase font-bold text-colorNavy') Password Change
-                        form(action='')
+                        form.form-user-password
                             div.mb-5
                                 label(for='', class='text-sm text-gray-700') Current password
-                                input(type='password', class='block mt-2 text-sm w-full py-2 px-5 text-gray-900 placeholder-gray-500 transition-all duration-200 bg-gray-100 border border-gray-100 focus:outline-none focus:border-gray-500 caret-gray-500', placeholder='••••••••••••••••', required='', minlength='8')
+                                input(type='password', id='password-current', class='block mt-2 text-sm w-full py-2 px-5 text-gray-900 placeholder-gray-500 transition-all duration-200 bg-gray-100 border border-gray-100 focus:outline-none focus:border-gray-500 caret-gray-500', placeholder='••••••••••••••••', required='')
                             div.mb-5
                                 label(for='', class='text-sm text-gray-700') New password
-                                input(type='password', class='block mt-2 text-sm w-full py-2 px-5 text-gray-900 placeholder-gray-500 transition-all duration-200 bg-gray-100 border border-gray-100 focus:outline-none focus:border-gray-500 caret-gray-500', placeholder='••••••••••••••••', required='', minlength='8')
+                                input(type='password', id='password', class='block mt-2 text-sm w-full py-2 px-5 text-gray-900 placeholder-gray-500 transition-all duration-200 bg-gray-100 border border-gray-100 focus:outline-none focus:border-gray-500 caret-gray-500', placeholder='••••••••••••••••', required='')
                             div.mb-5
                                 label(for='', class='text-sm text-gray-700') Confirm password
-                                input(type='password', class='block mt-2 text-sm w-full py-2 px-5 text-gray-900 placeholder-gray-500 transition-all duration-200 bg-gray-100 border border-gray-100 focus:outline-none focus:border-gray-500 caret-gray-500', placeholder='••••••••••••••••', required='', minlength='8')
+                                input(type='password', id='password-confirm', class='block mt-2 text-sm w-full py-2 px-5 text-gray-900 placeholder-gray-500 transition-all duration-200 bg-gray-100 border border-gray-100 focus:outline-none focus:border-gray-500 caret-gray-500', placeholder='••••••••••••••••', required='')
                             div
-                                a(href='' class='bg-colorNavy uppercase rounded-full px-5 py-2 text-colorWhite text-sm float-right hover:bg-gray-700') Save password 
+                                button(type="submit" class='bg-colorNavy uppercase rounded-full px-5 py-2 text-colorWhite text-sm float-right hover:bg-gray-700') Save Password
