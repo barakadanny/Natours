@@ -13,7 +13,6 @@ export const updateSettings = async (data, type) => {
             url,
             data
         })
-        console.log(type)
         if(res.data.status) {
             console.log("it passes successfully");
             showAlert('error', `${type} updated successfully!`);
