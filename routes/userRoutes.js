@@ -1,10 +1,18 @@
 const express = require('express');
-const multer = require('multer');
-const { getAllUsers, createUser, getUser, updateUser, deleteUser, updateMe, deleteMe, getMe } = require('./../controllers/userController');
-const { signup, login,logout, forgotPassword, resetPassword, updatePassword } = require('./../controllers/authController');
-const { protect, restrictTo } = require('./../controllers/authController');
+const { 
+        getAllUsers,
+        createUser,
+        getUser,
+        updateUser,
+        deleteUser,
+        updateMe,
+        deleteMe,
+        getMe,
+        uploadUserPhoto 
+    } = require('./../controllers/userController');
+const { signup, login,logout, forgotPassword, resetPassword, updatePassword, protect, restrictTo } = require('./../controllers/authController');
+// const { protect, restrictTo } = require('./../controllers/authController');
 
-const upload = multer({ dest: 'public/img/users'});
 
 const router = express.Router();
 
@@ -33,7 +41,7 @@ router
     .patch('/updateMyPassword', updatePassword)
 
 router
-    .patch('/updateMe',upload.single('photo') , updateMe)
+    .patch('/updateMe',uploadUserPhoto, updateMe)
 
 router
     .delete('/deleteMe', deleteMe)
