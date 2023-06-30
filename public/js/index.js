@@ -1,8 +1,10 @@
 import { login, logout } from './login'
+import { signup } from './signup'
 import { updateSettings } from './updateSettings'
 
 // DOM elements
 const loginForm = document.querySelector('.form')
+const signupForm = document.querySelector('.signupForm')
 const logOutBtn = document.querySelector('.logoutBtn')
 const userDataForm = document.querySelector('.form-user-data')
 const userPasswordForm = document.querySelector('.form-user-password')
@@ -17,6 +19,16 @@ if (loginForm)
     })
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
+
+if (signupForm)
+    signupForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const name = document.querySelector('#name').value;
+        const email = document.querySelector('#email').value;
+        const password = document.querySelector('#password').value;
+        const passwordConfirm = document.querySelector('#passwordConfirm').value;
+        signup(name, email, password, passwordConfirm);
+    })
 
 if (userDataForm)
     userDataForm.addEventListener('submit', e => {
