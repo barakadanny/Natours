@@ -26,7 +26,8 @@ if (signupForm)
         const name = document.querySelector('#name').value;
         const email = document.querySelector('#email').value;
         const password = document.querySelector('#password').value;
-        signup(name, email, password);
+        const passwordConfirm = document.querySelector('#passwordConfirm').value;
+        signup(name, email, password, passwordConfirm);
     })
 
 if (userDataForm)
