@@ -33,7 +33,7 @@ app.use(
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"],
         connectSrc: ["'self'", "http://localhost"],
-        connectSrc: ["'self'", "ws://localhost:53904/"]
+        connectSrc: ["'self'", "ws://localhost:51516/"]
       },
   })
 );
