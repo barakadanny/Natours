@@ -249,8 +249,9 @@ var signup = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
-          _context.next = 3;
+          console.log(name, email, password, passwordConfirm);
+          _context.prev = 1;
+          _context.next = 4;
           return axios({
             method: 'POST',
             url: 'http://localhost:3000/api/v1/users/signup',
@@ -261,19 +262,25 @@ var signup = /*#__PURE__*/function () {
               passwordConfirm: passwordConfirm
             }
           });
-        case 3:
+        case 4:
           res = _context.sent;
-          _context.next = 9;
+          if (res.data.status === "success") {
+            (0, _alert.showAlert)('success', 'SignUp successfully!');
+            window.setTimeout(function () {
+              location.assign('/me');
+            }, 1500);
+          }
+          _context.next = 11;
           break;
-        case 6:
-          _context.prev = 6;
-          _context.t0 = _context["catch"](0);
+        case 8:
+          _context.prev = 8;
+          _context.t0 = _context["catch"](1);
           (0, _alert.showAlert)('error', _context.t0.response.data.message);
-        case 9:
+        case 11:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 6]]);
+    }, _callee, null, [[1, 8]]);
   }));
   return function signup(_x, _x2, _x3, _x4) {
     return _ref.apply(this, arguments);
@@ -358,7 +365,8 @@ if (signupForm) signupForm.addEventListener('submit', function (e) {
   var name = document.querySelector('#name').value;
   var email = document.querySelector('#email').value;
   var password = document.querySelector('#password').value;
-  (0, _signup.signup)(name, email, password);
+  var passwordConfirm = document.querySelector('#passwordConfirm').value;
+  (0, _signup.signup)(name, email, password, passwordConfirm);
 });
 if (userDataForm) userDataForm.addEventListener('submit', function (e) {
   e.preventDefault();
