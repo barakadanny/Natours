@@ -8,11 +8,20 @@ const {
         updateMe,
         deleteMe,
         getMe,
-        uploadUserPhoto 
+        uploadUserPhoto, 
+        resizeUserPhoto
     } = require('./../controllers/userController');
-const { signup, login,logout, forgotPassword, resetPassword, updatePassword, protect, restrictTo } = require('./../controllers/authController');
-// const { protect, restrictTo } = require('./../controllers/authController');
 
+const { 
+        signup, 
+        login,
+        logout, 
+        forgotPassword, 
+        resetPassword, 
+        updatePassword, 
+        protect, 
+        restrictTo 
+    } = require('./../controllers/authController');
 
 const router = express.Router();
 
@@ -41,7 +50,7 @@ router
     .patch('/updateMyPassword', updatePassword)
 
 router
-    .patch('/updateMe',uploadUserPhoto, updateMe)
+    .patch('/updateMe',uploadUserPhoto, resizeUserPhoto, updateMe)
 
 router
     .delete('/deleteMe', deleteMe)
