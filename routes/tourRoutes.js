@@ -3,7 +3,9 @@ const {
     getAllTours, 
     createTour, 
     getTour, 
-    updateTour, 
+    updateTour,
+    uploadImages, 
+    resizeTourImages,
     deleteTour, 
     aliasTopTours, 
     getTourStats, 
@@ -48,7 +50,7 @@ router
 router
     .route('/:id')
     .get(getTour)
-    .patch(protect, restrictTo('admin', 'lead-guide'), updateTour)
+    .patch(protect, restrictTo('admin', 'lead-guide'), uploadImages, resizeTourImages, updateTour)
     .delete(protect, restrictTo('admin', 'lead-guide'), deleteTour)
 
 module.exports = router;
