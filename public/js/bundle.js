@@ -370,12 +370,11 @@ if (signupForm) signupForm.addEventListener('submit', function (e) {
 });
 if (userDataForm) userDataForm.addEventListener('submit', function (e) {
   e.preventDefault();
-  var name = document.querySelector('#name').value;
-  var email = document.querySelector('#email').value;
-  (0, _updateSettings.updateSettings)({
-    name: name,
-    email: email
-  }, 'data');
+  var form = new FormData();
+  form.append('name', document.querySelector('#name').value);
+  form.append('email', document.querySelector('#email').value);
+  form.append('photo', document.querySelector('#photo').files[0]);
+  (0, _updateSettings.updateSettings)(form, 'data');
 });
 if (userPasswordForm) userPasswordForm.addEventListener('submit', /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
