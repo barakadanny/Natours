@@ -1,5 +1,5 @@
 const multer = require('multer');
-const sharp = require('sharp');ß
+const sharp = require('sharp');
 const Tour = require('./../models/tourModel');
 const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
@@ -19,6 +19,11 @@ const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter
 });
+
+exports.uploadImages = upload.fields([
+  { name: 'imageCover', maxCount: 1 },
+  { name: 'images', maxCount: 3 }
+]);
 
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';
