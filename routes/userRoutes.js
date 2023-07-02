@@ -1,7 +1,27 @@
 const express = require('express');
-const { getAllUsers, createUser, getUser, updateUser, deleteUser, updateMe, deleteMe, getMe } = require('./../controllers/userController');
-const { signup, login,logout, forgotPassword, resetPassword, updatePassword } = require('./../controllers/authController');
-const { protect, restrictTo } = require('./../controllers/authController');
+const { 
+        getAllUsers,
+        createUser,
+        getUser,
+        updateUser,
+        deleteUser,
+        updateMe,
+        deleteMe,
+        getMe,
+        uploadUserPhoto, 
+        resizeUserPhoto
+    } = require('./../controllers/userController');
+
+const { 
+        signup, 
+        login,
+        logout, 
+        forgotPassword, 
+        resetPassword, 
+        updatePassword, 
+        protect, 
+        restrictTo 
+    } = require('./../controllers/authController');
 
 const router = express.Router();
 
@@ -30,7 +50,7 @@ router
     .patch('/updateMyPassword', updatePassword)
 
 router
-    .patch('/updateMe', updateMe)
+    .patch('/updateMe',uploadUserPhoto, resizeUserPhoto, updateMe)
 
 router
     .delete('/deleteMe', deleteMe)
