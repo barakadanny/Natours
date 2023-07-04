@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer');
+const pug = require('pug');
+const htmlToText = require('html-to-text');
 
 module.exports = class Email {
     constructor(user, url) {
@@ -9,32 +11,48 @@ module.exports = class Email {
     }
 
     createTransport() {
+        if(process.env.NODE_ENV === 'production') {
+            return 1;  
+        }
+
+        return nodemailer.createTransport({
+            host: process.env.EMAIL_HOST,
+            port: process.env.EMAIL_PORT,
+            auth: {
+                user: process.env.EMAIL_USERNAME,
+                pass: process.env.EMAIL_PASSWORD
+            }
+        });
+    }
+
+    // Send the actual email
+    send(template, subject) {
+        // 1) Render HTML based on a pug template
+        const html = pug.renderFile(`${__dirname}/../views/emails/${template}.pug`)
         
+        // 2) Define email options
+        const mailOptions = {
+            from: this.from,
+            to: this.to,
+            subject,
+            html,
+            text: options.message
+        };
+
+        // 3) Create transport and send the email
+    };
+
+    sendWelcome() {
+        this.send('Welcome', 'Welcome to Jaloo family!')
     }
 }
 
 const sendEmail = async options => {
-    // 1) Create a transporter - a service that will send the email
-    const transporter = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: process.env.EMAIL_PORT,
-        auth: {
-            user: process.env.EMAIL_USERNAME,
-            pass: process.env.EMAIL_PASSWORD
-        }
-    });
 
     // 2) Define the email options
-    const mailOptions = {
-        from: 'Tours Support <support@tours.com>',
-        to: options.email,
-        subject: options.subject,
-        text: options.message
-        // html:
-    }
+    
 
     // 3) Actually send the email
     await transporter.sendMail(mailOptions);
 }
 
-module.exports = sendEmail;
