@@ -28,7 +28,11 @@ module.exports = class Email {
     // Send the actual email
     send(template, subject) {
         // 1) Render HTML based on a pug template
-        const html = pug.renderFile(`${__dirname}/../views/emails/${template}.pug`)
+        const html = pug.renderFile(`${__dirname}/../views/emails/${template}.pug`, {
+            firstname: this.firstname,
+            url: this.url,
+            subject
+        })
         
         // 2) Define email options
         const mailOptions = {
@@ -36,7 +40,7 @@ module.exports = class Email {
             to: this.to,
             subject,
             html,
-            text: options.message
+            text: htmlToText.fromString(html)
         };
 
         // 3) Create transport and send the email
