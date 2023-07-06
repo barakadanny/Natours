@@ -1,5 +1,18 @@
 const nodemailer = require('nodemailer');
 
+module.exports = class Email {
+    constructor(user, url) {
+        this.to - user.email;
+        this.firstname = user.name.split(' ')[0];
+        this.url = url;
+        this.from = `Tours Support <${process.env.EMAIL_FROM}>`;
+    }
+
+    createTransport() {
+        
+    }
+}
+
 const sendEmail = async options => {
     // 1) Create a transporter - a service that will send the email
     const transporter = nodemailer.createTransport({
